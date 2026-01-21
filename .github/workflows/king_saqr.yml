@@ -1,23 +1,20 @@
-name: FINAL KING SAQR BUILD
-on:
-  workflow_dispatch: # هذا السطر يسمح لك بتشغيل البناء يدوياً وتجاوز الحظر الآلي
+name: KING SAQR FINAL BUILD
+on: 
+  workflow_dispatch: # هذا السطر هو مفتاح الحل للتشغيل اليدوي
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Setup Python
-        uses: actions/setup-python@v2
-        with:
-          python-version: '3.8'
       - name: Install Buildozer
         run: |
-          pip install --user buildozer cython kivy
-      - name: Build With King Saqr Rights
+          sudo apt-get update
+          pip3 install --user buildozer cython
+      - name: Create APK
         run: |
           yes | /home/runner/.local/bin/buildozer android debug
-      - name: Upload APK
+      - name: Upload
         uses: actions/upload-artifact@v2
         with:
-          name: KING-SAQR-HACKER-APP
+          name: KING-SAQR-APP
           path: bin/*.apk
